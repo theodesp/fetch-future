@@ -1,0 +1,56 @@
+{
+  "name": "fetch-future",
+  "version": "1.0.0",
+  "description": "Fetch using monadic Futures instead of promises",
+  "homepage": "https://github.com/theodesp/fetch-future",
+  "license": "MIT",
+  "keywords": [
+    "fetch",
+    "future",
+    "monad",
+    "xhr",
+    "ajax"
+  ],
+  "repository": "https://github.com/theodesp/fetch-future.git",
+  "main": "dist/fetch-future.js",
+  "module": "dist/fetch-future.es.js",
+  "jsnext:main": "dist/fetch-future.es.js",
+  "umd:main": "dist/fetch-future.umd.js",
+  "scripts": {
+    "test": "eslint src test && mocha --compilers js:babel-register test/**/*.js",
+    "cover": "istanbul cover node_modules/.bin/_mocha test/*.js -- -u exports --compilers js:babel-register --timeout 60000",
+    "build": "npm-run-all --silent clean -p rollup:* -p minify:* -s",
+    "clean": "rimraf dist",
+    "rollup:cjs": "cross-env FORMAT=cjs rollup -c rollup.config.js -f cjs -n $npm_package_name -o $npm_package_main",
+    "rollup:umd": "cross-env FORMAT=umd rollup -c rollup.config.js -f umd -n $npm_package_name -o $npm_package_umd_main",
+    "rollup:esm": "rollup -c rollup.config.js -f es -n $npm_package_name -o $npm_package_module",
+    "minify:cjs": "uglifyjs $npm_package_main -cm toplevel -o $npm_package_main -p relative --in-source-map ${npm_package_main}.map --source-map ${npm_package_main}.map",
+    "minify:umd": "uglifyjs $npm_package_umd_main -cm -o $npm_package_umd_main -p relative --in-source-map ${npm_package_umd_main}.map --source-map ${npm_package_umd_main}.map"
+  },
+  "authors": [
+    "Theo Despoudis <thdespou@hotmail.com>"
+  ],
+  "devDependencies": {
+    "babel-core": "^6.24.0",
+    "babel-eslint": "^7.2.1",
+    "babel-preset-es2015": "^6.24.0",
+    "babel-preset-stage-0": "^6.22.0",
+    "babel-register": "^6.24.0",
+    "chai": "^3.5.0",
+    "cross-env": "^3.2.4",
+    "eslint": "^3.18.0",
+    "eslint-config-standard": "^7.1.0",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^2.1.1",
+    "fluture": "^5.0.0",
+    "isparta": "^4.0.0",
+    "istanbul": "^0.4.5",
+    "mocha": "^3.2.0",
+    "npm-run-all": "^4.0.2",
+    "rimraf": "^2.6.1",
+    "rollup": "^0.41.6",
+    "rollup-plugin-buble": "^0.15.0",
+    "rollup-plugin-post-replace": "^1.0.0",
+    "uglify-js": "^2.8.15"
+  }
+}

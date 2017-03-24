@@ -1,0 +1,14 @@
+{
+    "extends": "standard",
+    "parser": "babel-eslint",
+    "plugins": [
+        "standard",
+        "promise"
+    ],
+    "env": {
+        "browser": true,
+        "mocha": true,
+        "node": true,
+        "es6": true
+    }
+}
