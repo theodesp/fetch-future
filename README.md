@@ -23,6 +23,9 @@ For more information about Futures see:
 
 Usage
 > yarn install https://github.com/theodesp/fetch-future.git
+
+add your future flavor
+
 > yarn add fluture // or data.task or ramda-fantasy
 
 
