@@ -1,4 +1,4 @@
-export const fetchF = Future => function (input, options = {}) {
+export const fetchF = Future => (input, options = {}) => {
   return new Future((reject, resolve) => {
     'use strict'
     const request = new XMLHttpRequest()
@@ -14,7 +14,7 @@ export const fetchF = Future => function (input, options = {}) {
     request.onerror = reject
     request.send(options.body)
 
-    const cancel = () => request.abort()
+    return () => request.abort()
 
     function response () {
       let keys = []
@@ -41,7 +41,6 @@ export const fetchF = Future => function (input, options = {}) {
         }, headers)
       return {
         ok: Future.of((request.status / 200 | 0) === 1),
-        abort: cancel,
         // 200-399
         status: Future.of(request.status),
         statusText: Future.of(request.statusText),

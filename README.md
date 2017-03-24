@@ -26,7 +26,7 @@ Usage
 
 add your future flavor
 
-> yarn add fluture // or data.task or ramda-fantasy
+> yarn add fluture // or data.task but no ramda-fantasy as it cannot abort!
 
 
 Example
