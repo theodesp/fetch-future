@@ -5,7 +5,7 @@ export const fetchF = Future => fn => function (input, options) {
     let url = input;
     request.open(options.method || 'get', url)
 
-    for (let i of options.headers) {
+    for (let i in options.headers) {
       request.setRequestHeader(i, options.headers[i])
     }
 
