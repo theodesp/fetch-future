@@ -1,8 +1,8 @@
-export const fetchF = Future => fn => function (input, options) {
+export const fetchF = Future => function (input, options = {}) {
   return new Future((reject, resolve) => {
     'use strict'
     let request = new XMLHttpRequest()
-    let url = input;
+    let url = input
     request.open(options.method || 'get', url)
 
     for (let i in options.headers) {
