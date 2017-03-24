@@ -19,28 +19,40 @@ export const fetchF = Future => function (input, options = {}) {
       let all = []
       let headers = {}
       let header
+      request.getAllResponseHeaders()
+        .split('\u000d\u000a')
+        .filter(Boolean)
+        .reduce((acc, curr) => {
+          let headerPair = curr
+          // Can't use split() here because it does the wrong thing
+          // if the header value has the string ": " in it.
+          let index = headerPair.indexOf('\u003a\u0020')
+          if (index > 0) {
+            let key = headerPair.substring(0, index)
+            let value = headerPair.substring(index + 2)
 
-      request.getAllResponseHeaders().replace(/^(.*?):\s*([\s\S]*?)$/gm, (m, key, value) => {
-        keys.push(key = key.toLowerCase())
-        all.push([key, value])
-        header = headers[key]
-        headers[key] = header ? `${header},${value}` : value
-      })
+            keys.push(key = key.toLowerCase())
+            all.push([key, value])
+            header = headers[key]
+            headers[key] = header ? `${header},${value}` : value
+          }
+        }, headers)
       return {
-        ok: (request.status / 200 | 0) === 1,    // 200-399
-        status: request.status,
-        statusText: request.statusText,
-        url: request.responseURL,
-        clone: response,
-        text: () => Future.of(request.responseText),
-        json: () => Future.of(JSON.parse(request.responseText)),
-        xml: () => Future.of(request.responseXML),
-        blob: () => Future.of(new Blob([request.response])),
+        ok: Future.of((request.status / 200 | 0) === 1),
+        // 200-399
+        status: Future.of(request.status),
+        statusText: Future.of(request.statusText),
+        url: Future.of(request.responseURL),
+        clone: Future.of(response),
+        text: Future.of(request.responseText),
+        json: Future.of(JSON.parse(request.responseText)),
+        xml: Future.of(request.responseXML),
+        blob: Future.of(new Blob([request.response])),
         headers: {
-          keys: () => keys,
-          entries: () => all,
-          get: n => headers[n.toLowerCase()],
-          has: n => n.toLowerCase() in headers
+          keys: Future.of(keys),
+          entries: Future.of(all),
+          get: n => Future.of(headers[n.toLowerCase()]),
+          has: n => Future.of(n.toLowerCase() in headers)
         }
       }
     }
