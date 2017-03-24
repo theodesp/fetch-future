@@ -43,7 +43,7 @@ fetch('https://jsonplaceholder.typicode.com/posts')
 ```
 
 ### Cancel a future!
-# [![](cancel.gif)](#cancel)
+# [![](cancel.jpg)](#cancel)
 
 ```js
 import { fetchF } from 'fetch-future';
