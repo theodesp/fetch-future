@@ -58,7 +58,7 @@ const future = fetch('https://jsonplaceholder.typicode.com/posts')
   .chain(res => res.json()) // json() is also a Future!
   .fork(console.error, console.log) // Future  to be resolved!
   
-future(); // Cancels by calling the future!
+future.cancel(); // Aborts the fetch by calling cancel!
 ```
 
 ## Fetch Caveats
