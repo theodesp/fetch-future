@@ -1,8 +1,8 @@
 export const fetchF = Future => function (input, options = {}) {
   return new Future((reject, resolve) => {
     'use strict'
-    let request = new XMLHttpRequest()
-    let url = input
+    const request = new XMLHttpRequest()
+    const url = input
     request.open(options.method || 'get', url)
 
     for (let i in options.headers) {
@@ -23,13 +23,13 @@ export const fetchF = Future => function (input, options = {}) {
         .split('\u000d\u000a')
         .filter(Boolean)
         .reduce((acc, curr) => {
-          let headerPair = curr
+          const headerPair = curr
           // Can't use split() here because it does the wrong thing
           // if the header value has the string ": " in it.
-          let index = headerPair.indexOf('\u003a\u0020')
+          const index = headerPair.indexOf('\u003a\u0020')
           if (index > 0) {
             let key = headerPair.substring(0, index)
-            let value = headerPair.substring(index + 2)
+            const value = headerPair.substring(index + 2)
 
             keys.push(key = key.toLowerCase())
             all.push([key, value])
