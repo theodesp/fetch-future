@@ -22,14 +22,14 @@ For more information about Futures see:
 * [Comparison of Futures to Promises](https://github.com/fluture-js/Fluture/wiki/Comparison-to-Promises)
 
 Usage
-> yarn install https://github.com/theodesp/fetch-future
+> yarn install https://github.com/theodesp/fetch-future.git
 > yarn add fluture // or data.task or ramda-fantasy
 
 
 Example
 -------
 
-Fetch some objects from an api
+### Fetch some objects from an api
 
 ```js
 import { fetchF } from 'fetch-future';
@@ -42,7 +42,8 @@ fetch('https://jsonplaceholder.typicode.com/posts')
   .fork(console.error, console.log) // Future Fantasy!
 ```
 
-Cancel a future!
+### Cancel a future!
+# [![](cancel.gif)](#cancel)
 
 ```js
 import { fetchF } from 'fetch-future';
