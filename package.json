@@ -28,7 +28,7 @@
     "minify:umd": "uglifyjs $npm_package_umd_main -cm -o $npm_package_umd_main -p relative --in-source-map ${npm_package_umd_main}.map --source-map ${npm_package_umd_main}.map"
   },
   "authors": [
-    "Theo Despoudis <thdespou@hotmail.com>"
+    "Theo Despoudis"
   ],
   "devDependencies": {
     "babel-core": "^6.24.0",
